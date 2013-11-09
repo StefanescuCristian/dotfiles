@@ -1,0 +1,107 @@
+background yes
+use_xft yes
+xftfont 123:size=8
+xftalpha 0.1
+update_interval 1
+total_run_times 0
+own_window yes
+own_window_type normal
+own_window_transparent yes
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+#own_window_argb_visual yes 
+#own_window_argb_value 100
+double_buffer yes
+draw_shades yes
+draw_outline no
+draw_borders no
+draw_graph_borders yes
+default_color lightgray
+default_shade_color black
+default_outline_color black
+alignment top_right
+gap_x 25
+uppercase no
+cpu_avg_samples 2
+net_avg_samples 2
+override_utf8_locale yes
+use_spacer none
+minimum_size 250 
+maximum_width 250 
+top_cpu_separate no
+
+lua_load ~/Downloads/bargraph_small.lua
+lua_draw_hook_pre draw_bg
+lua_draw_hook_post main_bars
+TEXT
+${alignc 48}${font Open Sans:size=20}${color orangered}ubuntu${color} linux
+${alignc -48}${font Open Sans:size=10}${color white}${uid_name 1000}@$nodename${font}${color}
+
+# SYS
+${font Open Sans:Bold:size=10}${color lightsteelblue}SYSTEM${hr 2}$color${font}
+${color lightsteelblue}$kernel $alignr $machine${color}
+Uptime: ${alignr}${color lightsteelblue}$uptime${color}
+Entyropy: ${alignr}${color lightsteelblue}${entropy_avail}/${entropy_poolsize}${color}
+Load: ${alignr}${color lightsteelblue}${loadavg 1 2 3}${color}
+Package Temperature: $alignr ${color lightsteelblue}${hwmon 2 temp 1}°C${color}
+
+# CPU
+${font Open Sans:Bold:size=10}${color lightsteelblue}CPU${hr 2}
+$color${font}${execi 100 cat /proc/cpuinfo | grep "model name" | sed -e 's/.*\: //g' -e 's/ CPU.*//g' | head -n1} $alignr ${freq_g cpu0}GHz
+
+${font}Core 0 ${color lightsteelblue}${hwmon 0 temp 2}°C${color} - ${cpu cpu1}%
+${font}Core 1 ${color lightsteelblue}${hwmon 0 temp 3}°C${color} - ${cpu cpu2}%
+${font}Core 2 ${color lightsteelblue}${hwmon 0 temp 4}°C${color} - ${cpu cpu3}%
+${font}Core 3 ${color lightsteelblue}${hwmon 0 temp 5}°C${color} - ${cpu cpu4}%
+ 
+# TOP
+${font Open Sans:Bold:size=10}${color lightsteelblue}TOP${hr 2}
+$color${font}${font Open Sans:bold:size=8.5}PROCESS $alignr CPU USAGE$font
+${top name 1}${alignr}${top cpu 1} %
+${top name 2}${alignr}${top cpu 2} %
+${top name 3}${alignr}${top cpu 3} %
+${top name 4}${alignr}${top cpu 4} %
+ 
+# MEMORY
+${font Open Sans:Bold:size=10}${color lightsteelblue}MEMORY${hr 2}
+$color${font}${font Open Sans:bold:size=8.5}RAM$font
+$mem / $memmax $alignr ${color lightsteelblue}$memperc %${color}
+
+Cache:$alignr${color lightsteelblue}$cached${color}
+Buffers:$alignr${color lightsteelblue}$buffers${color}
+
+#GPU 
+${font Open Sans:Bold:size=10}${color lightsteelblue}GPU${hr 2}${color}${font}
+${execi 100 lspci | grep VGA | sed -e 's/.*: //g' -e 's/ .rev.*//g'}
+Temperature:$alignr${color lightsteelblue}${nvidia temp}°C${color}
+GPU frequency:$alignr${color lightsteelblue}${nvidia gpufreq}MHz${color}
+Memory frequency:$alignr${color lightsteelblue}${nvidia memfreq}MHz${color}
+
+# NETWORK
+${font Open Sans:Bold:size=10}${color lightsteelblue}NETWORK${hr 2}
+$color${font Open Sans:bold:size=8.5}External IP ${font}${color lightsteelblue}${alignr}${execi 3600 wget -O - http://ip.tupeux.com | tail}$font${color}
+ 
+${font Open Sans:bold:size=8.5}eth0 $font$alignr ${addr eth0}
+down $alignr ${color lightsteelblue}${downspeedf eth0} kb/s${color}
+up $alignr ${color lightsteelblue}${upspeedf eth0} kb/s${color}
+down total ${color lightsteelblue}${totaldown eth0}${color} $alignr up total ${color lightsteelblue}${totalup eth0}${color}
+
+# Music
+${font Open Sans:Bold:size=10}${color lightsteelblue}MUSIC${hr 2}$color${font}
+${if_running rhythmbox}
+Artist: ${color lightsteelblue}${exec rhythmbox-client --print-playing-format "%ta"}${color}
+Album: ${color lightsteelblue}${exec rhythmbox-client --print-playing-format %at}${color}
+Track: ${color lightsteelblue}${exec rhythmbox-client --print-playing-format "%tn - %tt"}${color}
+${color lightsteelblue}${execbar ~/.rhy_bar}${color}
+$endif
+# HDD
+${font Open Sans:Bold:size=10}${color lightsteelblue}DISKS${hr 2}{$color}${font}
+${font Open Sans:bold:size=8.5}Internal${font}
+/dev/sda: ${alignc}${color lightsteelblue}${hddtemp /dev/sda}°C${color} $alignr read: ${color lightsteelblue}${diskio_read /dev/sda}${color} write: ${color lightsteelblue}${diskio_write /dev/sda}${color}
+/dev/sdb: ${alignc}${color lightsteelblue}${hddtemp /dev/sdb}°C${color} $alignr read: ${color lightsteelblue}${diskio_read /dev/sdb}${color} write: ${color lightsteelblue}${diskio_write /dev/sdb}${color}
+
+${font Open Sans:bold:size=8.5}External${font}
+${if_empty ${execp df | grep sr0}}CD/DVD empty${else}/dev/sr0 ${execp df -H | grep 'sr0' | sed 's/.*\///g'}${alignr}${execp df -H | awk '/sr0/ {print $3, "/", $2}'}${endif}
+${if_existing  /dev/sdc}/dev/sdc:$alignr read: ${color lightsteelblue}${diskio_read /dev/sdc}${color} write: ${color lightsteelblue}${diskio_write /dev/sdc}${color}${endif}
+${if_existing  /dev/sdd}/dev/sdd:$alignr read: ${color lightsteelblue}${diskio_read /dev/sdd}${color} write: ${color lightsteelblue}${diskio_write /dev/sdd}${color}${endif}
+${if_existing  /dev/sde}/dev/sde:$alignr read: ${color lightsteelblue}${diskio_read /dev/sde}${color} write: ${color lightsteelblue}${diskio_write /dev/sde}${color}${endif}
+${if_existing  /dev/sdf}/dev/sdf:$alignr read: ${color lightsteelblue}${diskio_read /dev/sdf}${color} write: ${color lightsteelblue}${diskio_write /dev/sdf}${color}${endif}
