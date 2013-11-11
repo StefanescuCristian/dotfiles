@@ -1,4 +1,4 @@
-background yes
+background no
 use_xft yes
 xftfont 123:size=8
 xftalpha 0.1
@@ -55,11 +55,11 @@ ${font}Core 3 ${color lightsteelblue}${hwmon 0 temp 5}°C${color} - ${cpu cpu4}%
  
 # TOP
 ${font Open Sans:Bold:size=10}${color lightsteelblue}TOP${hr 2}
-$color${font}${font Open Sans:bold:size=8.5}PROCESS $alignr CPU USAGE$font
-${top name 1}${alignr}${top cpu 1} %
-${top name 2}${alignr}${top cpu 2} %
-${top name 3}${alignr}${top cpu 3} %
-${top name 4}${alignr}${top cpu 4} %
+$color${font}${font Open Sans:bold:size=8.5}PROCESS $alignr CPU $font
+${top name 1} ${alignr}${top cpu 1}%
+${top name 2} ${alignr}${top cpu 2}%
+${top name 3} ${alignr}${top cpu 3}%
+${top name 4} ${alignr}${top cpu 4}%
  
 # MEMORY
 ${font Open Sans:Bold:size=10}${color lightsteelblue}MEMORY${hr 2}
@@ -78,7 +78,7 @@ Memory frequency:$alignr${color lightsteelblue}${nvidia memfreq}MHz${color}
 
 # NETWORK
 ${font Open Sans:Bold:size=10}${color lightsteelblue}NETWORK${hr 2}
-$color${font Open Sans:bold:size=8.5}External IP ${font}${color lightsteelblue}${alignr}${execi 3600 wget -O - http://ip.tupeux.com | tail}$font${color}
+$color${font Open Sans:bold:size=8.5}External IP ${font}${color lightsteelblue}${alignr}${execi 100 wget -O - http://ip.tupeux.com | tail}$font${color}
  
 ${font Open Sans:bold:size=8.5}eth0 $font$alignr ${addr eth0}
 down $alignr ${color lightsteelblue}${downspeedf eth0} kb/s${color}
@@ -100,7 +100,7 @@ ${font Open Sans:bold:size=8.5}Internal${font}
 /dev/sdb: ${alignc}${color lightsteelblue}${hddtemp /dev/sdb}°C${color} $alignr read: ${color lightsteelblue}${diskio_read /dev/sdb}${color} write: ${color lightsteelblue}${diskio_write /dev/sdb}${color}
 
 ${font Open Sans:bold:size=8.5}External${font}
-${if_empty ${execp df | grep sr0}}CD/DVD empty${else}/dev/sr0 ${execp df -H | grep 'sr0' | sed 's/.*\///g'}${alignr}${execp df -H | awk '/sr0/ {print $3, "/", $2}'}${endif}
+${if_empty ${execp df | grep sr0}}CD/DVD empty${else}/dev/sr0 ${execp df -H | grep 'sr0' | sed 's/.*\///g'}${alignr}${execp df -H | grep 'sr0' | awk '/sr0/ {print $3, "/", $2}'}${endif}
 ${if_existing  /dev/sdc}/dev/sdc:$alignr read: ${color lightsteelblue}${diskio_read /dev/sdc}${color} write: ${color lightsteelblue}${diskio_write /dev/sdc}${color}${endif}
 ${if_existing  /dev/sdd}/dev/sdd:$alignr read: ${color lightsteelblue}${diskio_read /dev/sdd}${color} write: ${color lightsteelblue}${diskio_write /dev/sdd}${color}${endif}
 ${if_existing  /dev/sde}/dev/sde:$alignr read: ${color lightsteelblue}${diskio_read /dev/sde}${color} write: ${color lightsteelblue}${diskio_write /dev/sde}${color}${endif}

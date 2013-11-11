@@ -85,8 +85,8 @@ v2.1 (07 Jan. 2011) Add draw_me parameter and correct memory leaks, thanks to "C
 ]]
 
 local corner_r = 50
-local bg_colour = 0xc0c0c0
-local bg_alpha = 0.1
+local bg_colour = 0x34486D
+local bg_alpha = 0.4
 
 
 require 'cairo'
@@ -347,12 +347,14 @@ function draw_multi_bar_graph(t)
   end
   return pat
  end
- local function rgb_to_r_g_b2(colour,alpha)
-    return ((colour / 0x10000) % 0x100) / 255., ((colour / 0x100) % 0x100) / 255., (colour % 0x100) / 255., alpha
-  end
+
+ function rgb_to_r_g_b2(colour,alpha)
+   return ((colour / 0x10000) % 0x100) / 255., ((colour / 0x100) % 0x100) / 255., (colour % 0x100) / 255., alpha
+ end
  
  function conky_draw_bg()
-    if conky_window==nil then return end
+  if conky_window == nil then return end
+
     local w=conky_window.width
     local h=conky_window.height
     local cs=cairo_xlib_surface_create(conky_window.display, conky_window.drawable, conky_window.visual, w, h)
@@ -377,7 +379,7 @@ function draw_multi_bar_graph(t)
   --this fucntion is used for bars with a single block (blocks=1) but 
   --the drawing is cut in 3 blocks : value/alarm/background
   --not zvzimzblr for circular bar
-  local function create_pattern(col_alp,col_led,bg)
+ local function create_pattern(col_alp,col_led,bg)
    local pat
    
    if not t.smooth then
@@ -512,10 +514,7 @@ local function draw_multi_bar()
    cairo_stroke(cr)
   end 
  end
- 
- 
- 
- 
+  
  local function setup_bar_graph()
   --function used to retrieve the value to display and to set the cairo structure
   if t.blocks ~=1 then t.y=t.y-t.height/2 end
@@ -535,7 +534,7 @@ local function draw_multi_bar()
    value = tonumber(t.arg)
   end
 
-  if value==nil then value =0 end
+  if value == nil then value = 0 end
   
   pct = 100*value/t.max
   pcb = 100/t.blocks
