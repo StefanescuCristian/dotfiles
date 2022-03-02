@@ -1,16 +1,17 @@
 [user]
 	name = Cristian Stefanescu
 	email = me@linux365.ro
+	signingkey = 2336468EEA673461
 [credential]
 	helper = store
 [alias]
 	cm = commit
 	cp = cherry-pick
 	st = status
-	ci = commit
-	co = checkout
-	br = branch
-	unstage = reset HEAD --
+   	ci = commit
+   	co = checkout
+    br = branch
+   	unstage = reset HEAD --
 	last = log -1 HEAD
 	slog = log --oneline --abbrev-commit --graph --decorate
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
@@ -18,7 +19,7 @@
 	lls = log --color --graph --pretty=format:'%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit --stat
 	ll = log --pretty=format:%C(yellow)%h%C(auto)%d\\ %Creset%s%Cblue\\ [%cn] --decorate --numstat
 	ld = log --pretty=format:%C(yellow)%h\\ %C(green)%ad%Cred%d\\ %Creset%s%Cblue\\ [%cn] --decorate --date=short --graph
-	ls = log --pretty=format:%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn] --decorate --date=relative
+    ls = log --pretty=format:%C(green)%h\\ %C(yellow)[%ad]%Cred%d\\ %Creset%s%Cblue\\ [%cn] --decorate --date=relative
 [pull]
 	rebase = true
 [push]
@@ -51,4 +52,6 @@
 [push]
 	default = current
 [includeIf "gitdir:~/wk/"]
-	path = ~/.gitconfig.wk
+  path = ~/.gitconfig.wk
+[commit]
+	gpgsign = true
