@@ -3,6 +3,7 @@ some dot files I collected over the years
 
 # Installation & usage
 
+**Manual:**
 * ZSH:
 
   Run `git clone https://github.com/jandamm/zgenom.git "${HOME}/.zgenom"`
@@ -15,3 +16,7 @@ some dot files I collected over the years
   * `git clone https://github.com/vim-airline/vim-airline ~/.vim/bundle/vim-airline`
   * `git clone https://github.com/vim-airline/vim-airline-themes ~/.vim/bundle/vim-airline-themes`
   * `git clone https://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive`
+
+**Ansible:**
+
+Run dotfiles playbook from https://github.com/StefanescuCristian/ansible/blob/master/playbooks
