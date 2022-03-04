@@ -123,7 +123,7 @@ alias TEMPERATURA='curl -s https://air.linux365.ro | grep data-units= | sed "s/.
 alias ls='ls -aF --color=auto'
 alias ll='ls -alhp --color=auto'
 alias grep='grep --color=auto'
-alias rm='rm -vI'
+alias rm='rm -v'
 alias cp='cp -vi'
 alias mv='mv -vi'
 alias dus="du -csh"
