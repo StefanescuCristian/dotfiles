@@ -293,6 +293,7 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/kube-ps1
     zgenom ohmyzsh plugins/rsync
     zgenom ohmyzsh plugins/screen
+    zgenom ohmyzsh plugins/systemd
     zgenom ohmyzsh plugins/sudo
     zgenom ohmyzsh plugins/universalarchive
     zgenom load zsh-users/zsh-syntax-highlighting
