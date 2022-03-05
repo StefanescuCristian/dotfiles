@@ -180,6 +180,7 @@ path=(
   "$HOME/.bin/"
   "${KREW_ROOT:-$HOME/.krew}/bin"
   /usr/local/bin
+  /usr/local/sbin
   /usr/bin
   /bin
   /usr/sbin
