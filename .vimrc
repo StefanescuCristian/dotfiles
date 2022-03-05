@@ -10,6 +10,10 @@ set ruler
 " search stuff
 set incsearch
 set hlsearch
+" set utf-8
+scriptencoding utf-8
+set encoding=utf-8
+
 set autoindent
 set backspace=indent,eol,start
 set ttyfast
