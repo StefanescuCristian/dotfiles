@@ -191,6 +191,9 @@ path=(
 
 [ -f ~/.iterm2_shell_integration.zsh ] && source ~/.iterm2_shell_integration.zsh
 
+# zsh autosuggestion tune
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+
 # load zgenom
 ZGEN_CUSTOM_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump_$ZSH_VERSION"
 
@@ -219,6 +222,7 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/sudo
     zgenom ohmyzsh plugins/universalarchive
     zgenom load zsh-users/zsh-syntax-highlighting
+    zgenom load zsh-users/zsh-autosuggestions
     zgenom load romkatv/powerlevel10k powerlevel10k
 
   # generate the init script from plugins above
