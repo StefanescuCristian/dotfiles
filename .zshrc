@@ -136,9 +136,8 @@ alias TEMPERATURA='curl -s https://air.linux365.ro | grep data-units= | sed "s/.
 alias ls='ls -aF --color=auto'
 alias ll='ls -alhp --color=auto'
 alias grep='grep --color=auto'
-alias rm='rm -v'
-alias cp='cp -vi'
-alias mv='mv -vi'
+alias cp='cp -i'
+alias mv='mv -i'
 alias dus="du -csh"
 alias duh="du -hc"
 alias sp='sudo pacman'
