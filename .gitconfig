@@ -51,7 +51,7 @@
 	autocrlf = input
 [push]
 	default = current
-[includeIf "gitdir:~/wk/"]
-	path = ~/.gitconfig.wk
+[includeIf "gitdir:~/mystuff/work/"]
+	path = ~/mystuff/work/.gitconfig.wk
 [commit]
 	gpgsign = true
