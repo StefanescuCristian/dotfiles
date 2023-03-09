@@ -218,7 +218,6 @@ if ! zgenom saved; then
 
     # specify plugins here
     zgenom load nviennot/zsh-vim-plugin
-    zgenom load unixorn/autoupdate-zgenom
     zgenom ohmyzsh plugins/colored-man-pages
     zgenom ohmyzsh plugins/colorize
     zgenom ohmyzsh plugins/command-not-found
