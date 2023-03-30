@@ -1,0 +1,14 @@
+#!/bin/bash
+#Par Ph3nix_
+
+convert_sec() {
+	min=`echo $1 | cut -d':' -f1`
+	sec=`echo $1 | cut -d':' -f2`
+	[[ ${sec:0:1} = '0' ]] && sec=${sec:1:2}
+	res=$((min*60+sec))
+}
+convert_sec $(rhythmbox-client --print-playing-format "%te")
+now=$res
+convert_sec $(rhythmbox-client --print-playing-format "%td")
+[ $res -eq 0 ] && echo 0 && exit
+echo ` echo "$now*100/$res" | bc -l`
