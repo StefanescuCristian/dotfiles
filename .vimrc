@@ -37,6 +37,9 @@ endif
 " kill trailing whitespaces automatically
 autocmd BufWritePre * :%s/\s\+$//e
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
 "airline https://github.com/vim-airline/vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline_highlighting_cache = 1
