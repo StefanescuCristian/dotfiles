@@ -221,6 +221,7 @@ if ! zgenom saved; then
     zgenom ohmyzsh plugins/colored-man-pages
     zgenom ohmyzsh plugins/colorize
     zgenom ohmyzsh plugins/command-not-found
+    zgenom ohmyzsh plugins/encode64
     zgenom ohmyzsh plugins/extract
     zgenom ohmyzsh plugins/fzf
     zgenom ohmyzsh plugins/genpass
