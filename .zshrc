@@ -174,6 +174,8 @@ alias sshr='ssh -l root -i ~/.ssh/em_id_rsa'
 alias k='kubectl'
 alias kns='kubens'
 alias ktx='kubectx'
+alias dlf='docker logs -f -n100'
+alias dls='docker logs'
 
 function docx(){
     if [ -f $1 ] ; then
