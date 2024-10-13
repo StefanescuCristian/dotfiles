@@ -176,6 +176,7 @@ alias kns='kubens'
 alias ktx='kubectx'
 alias dlf='docker logs -f -n100'
 alias dls='docker logs'
+alias mc='LANG=en_EN.UTF-8 mc --nosubshell'
 
 function docx(){
     if [ -f $1 ] ; then
